@@ -80,6 +80,14 @@ public class Character
     public Advantages advantages;
     public Disadvantages disadvantages;
 
+    public void Init()
+    {
+        st = 10;
+        dx = 10;
+        iq = 10;
+        ht = 10;
+    }
+
     public void CalcStats()
     {
         ZeroStats();

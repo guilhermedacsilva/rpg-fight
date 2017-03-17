@@ -75,9 +75,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Menu\MenuCaracterSheet.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuInitial.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Sheet\Advantages.cs" />
     <Compile Include="Assets\Scripts\Sheet\Character.cs" />
+    <Compile Include="Assets\Scripts\Sheet\Costs.cs" />
     <Compile Include="Assets\Scripts\Sheet\Disadvantages.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
