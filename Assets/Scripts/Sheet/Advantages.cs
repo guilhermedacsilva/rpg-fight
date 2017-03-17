@@ -9,19 +9,18 @@ namespace Assets.Scripts.Sheet
     public class Advantages
     {
         private Character character;
-        private List<int> advantageList;
+        private List<int> list;
 
-        public void Init(Character character, List<int> advantageList)
+        public Advantages(Character character)
         {
             this.character = character;
-            this.advantageList = advantageList;
-            character.advantages = this;
+            list = new List<int>();
         }
 
         public void ApplyAll()
         {
             Type thisType = this.GetType();
-            foreach (int methodNumber in advantageList)
+            foreach (int methodNumber in list)
             {
                 thisType.GetMethod("Apply" + methodNumber).Invoke(this, null);
             }

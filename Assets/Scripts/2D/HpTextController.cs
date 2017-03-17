@@ -33,7 +33,7 @@ public class HpTextController : MonoBehaviour
         this.total = (int)total;
     }
 
-    private void Update()
+    void LateUpdate()
     {
         transform.position = Camera.main.WorldToScreenPoint(targetUnit.position) + offset;
         GetComponentInChildren<Text>().text = current + "/" + total;

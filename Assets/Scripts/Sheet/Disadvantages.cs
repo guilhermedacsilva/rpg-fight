@@ -8,19 +8,18 @@ namespace Assets.Scripts.Sheet
     public class Disadvantages
     {
         private Character character;
-        private List<int> disadvantageList;
+        private List<int> list;
 
-        public void Init(Character character, List<int> disadvantageList)
+        public Disadvantages(Character character)
         {
             this.character = character;
-            this.disadvantageList = disadvantageList;
-            character.disadvantages = this;
+            list = new List<int>();
         }
 
         public void ApplyAll()
         {
             Type thisType = this.GetType();
-            foreach (int methodNumber in disadvantageList)
+            foreach (int methodNumber in list)
             {
                 thisType.GetMethod("Apply" + methodNumber).Invoke(this, null);
             }

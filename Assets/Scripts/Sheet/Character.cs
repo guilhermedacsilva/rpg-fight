@@ -86,6 +86,8 @@ public class Character
         dx = 10;
         iq = 10;
         ht = 10;
+        advantages = new Advantages(this);
+        disadvantages = new Disadvantages(this);
     }
 
     public void ResetCurrents()

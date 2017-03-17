@@ -8,8 +8,6 @@ public class MenuCaracterSheet : MonoBehaviour {
     private const int MAX_ATTRIBUTE = 20;
     private const int MIN_ATTRIBUTE = 7;
     private Character character;
-    private Advantages advantages;
-    private Disadvantages disadvantages;
     private Costs costs;
 
     public void Start()
@@ -21,10 +19,6 @@ public class MenuCaracterSheet : MonoBehaviour {
     {
         gameObject.SetActive(true);
         character = new Character();
-        advantages = new Advantages();
-        advantages.Init(character, new List<int>());
-        disadvantages = new Disadvantages();
-        disadvantages.Init(character, new List<int>());
         character.Init();
         character.CalcStats();
         costs = new Costs(character);
@@ -39,8 +33,8 @@ public class MenuCaracterSheet : MonoBehaviour {
         }
         gameObject.SetActive(false);
         GameObject player = PlayerController.GetObject();
-        PlayerStats stats = player.GetComponent<PlayerStats>();
-        stats.character = character;
+        CharacterState state = player.GetComponent<CharacterState>();
+        state.character = character;
         PlayerController.Activate();
         InputController.Activate();
         EnemiesController.CreateEnemy();

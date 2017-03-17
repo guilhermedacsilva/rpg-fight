@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private static GameObject playerObj;
     private Vector3 destination;
-    private PlayerStats stats;
+    private CharacterState charState;
     private HpTextController hpUI;
 
     public static GameObject GetObject()
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     
     void Start () {
         playerObj = gameObject;
-        stats = gameObject.GetComponent<PlayerStats>();
+        charState = gameObject.GetComponent<CharacterState>();
         destination = transform.position;
         hpUI = HpTextController.Create(gameObject);
         hpUI.gameObject.SetActive(false);
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         playerObj.SetActive(true);
         GetController().hpUI.gameObject.SetActive(true);
-        GetController().stats.character.ResetCurrents();
+        GetController().charState.character.ResetCurrents();
     }
 
     void Update () {
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        hpUI.SetHp(stats.character.life, stats.character.lifeMax);
+        hpUI.SetHp(charState.character.life, charState.character.lifeMax);
     }
 
     private void GoToDestination()
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void DoMove(Vector3 dest)
     {
-        Vector3 newPosition = Vector3.MoveTowards(transform.position, dest, stats.character.movement * Time.deltaTime);
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, dest, charState.character.movement * Time.deltaTime);
         
         if (Physics.OverlapSphere(newPosition + new Vector3(0, 0.5f, 0), 0.4f).Length == 1)
         {
