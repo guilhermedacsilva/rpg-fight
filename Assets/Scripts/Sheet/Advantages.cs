@@ -45,7 +45,7 @@ namespace Assets.Scripts.Sheet
         // amplified movement
         private void Apply3()
         {
-            character.movementPlus += 2.5;
+            character.movementPlus += 2.5f;
         }
         // damage reduction
         private void Apply4()

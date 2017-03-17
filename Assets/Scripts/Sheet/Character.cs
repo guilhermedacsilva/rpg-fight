@@ -20,7 +20,7 @@ public class Character
     public int weightMax; // st * st
     public int weightBase; // weigthMax / 10
     public int weight;
-    public double weightMult;
+    public float weightMult;
 
     /* examples
      * st == 12 >>> 1d + 2
@@ -42,20 +42,20 @@ public class Character
     public int damageSt;
     public int lifeExtra;
     public int lifeMax; // st
-    public double life;
-    public double lifeRegen;
+    public float life;
+    public float lifeRegen;
     public int staminaExtra;
     public int staminaMax; // ht
-    public double stamina;
-    public double staminaRegen;
-    public double staminaRegenPlus;
-    public double staminaRegenMult;
-    public double movement; // (dx + ht) / 4
+    public float stamina;
+    public float staminaRegen;
+    public float staminaRegenPlus;
+    public float staminaRegenMult;
+    public float movement; // (dx + ht) / 4
                             /* 1.0*: weight <= 1x wb (weightBase)
                              * 0.8*: weight <= 2x wb
                              * 0.6*: weight > 2x wb
                              */
-    public double movementPlus;
+    public float movementPlus;
     public int dodge; // moveSpeed + 3
                       /* -0: weight <= 1x wb (weightBase)
                        * -1: weight <= 2x wb
@@ -86,6 +86,12 @@ public class Character
         dx = 10;
         iq = 10;
         ht = 10;
+    }
+
+    public void ResetCurrents()
+    {
+        life = lifeMax;
+        stamina = staminaMax;
     }
 
     public void CalcStats()
@@ -144,7 +150,7 @@ public class Character
 
     private void CalcDamage()
     {
-        double damageMult = Mathf.Max(1, Mathf.Ceil((stCombat / 4.0f) - 2));
+        float damageMult = Mathf.Max(1, Mathf.Ceil((stCombat / 4.0f) - 2));
         int damagePlus = -2;
         if (stCombat >= 9)
         {
@@ -155,7 +161,7 @@ public class Character
 
     private void CalcMovement()
     {
-        movement = (dxActual + ht) / 4.0 + movementPlus;
+        movement = (dxActual + ht) / 4.0f + movementPlus;
     }
 
     private void CalcDodge()

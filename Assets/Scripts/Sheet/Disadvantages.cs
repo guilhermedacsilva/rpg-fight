@@ -51,7 +51,7 @@ namespace Assets.Scripts.Sheet
         private void Apply4()
         {
             character.resistanceStun -= 1;
-            character.staminaRegenMult = 0.5;
+            character.staminaRegenMult = 0.5f;
         }
         // consciousness loss
         private void Apply5()
@@ -61,7 +61,7 @@ namespace Assets.Scripts.Sheet
         // invertebrate
         private void Apply6()
         {
-            character.weightMult = 0.25;
+            character.weightMult = 0.25f;
         }
         // weak hand
         private void Apply7()
