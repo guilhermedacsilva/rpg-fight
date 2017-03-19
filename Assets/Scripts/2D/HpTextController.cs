@@ -27,15 +27,14 @@ public class HpTextController : MonoBehaviour
         offset = new Vector3(0, 0.08f * Screen.height, 0);
     }
 
-    public void SetHp(float current, float total)
+    public void SetHp(float current)
     {
         this.current = (int)current;
-        this.total = (int)total;
     }
 
     void LateUpdate()
     {
         transform.position = Camera.main.WorldToScreenPoint(targetUnit.position) + offset;
-        GetComponentInChildren<Text>().text = current + "/" + total;
+        GetComponentInChildren<Text>().text = current.ToString();
     }
 }

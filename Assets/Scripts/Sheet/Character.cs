@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Character
 {
+    private const float MOVEMENT_FIXED_MULTIPLIER = 0.7f;
     public int st;
     public int dx;
     public int iq;
@@ -50,6 +51,7 @@ public class Character
     public float staminaRegen;
     public float staminaRegenPlus;
     public float staminaRegenMult;
+    public float attackDelay;
     public float movement; // (dx + ht) / 4
                             /* 1.0*: weight <= 1x wb (weightBase)
                              * 0.8*: weight <= 2x wb
@@ -86,6 +88,7 @@ public class Character
         dx = 10;
         iq = 10;
         ht = 10;
+        attackDelay = 2;
         advantages = new Advantages(this);
         disadvantages = new Disadvantages(this);
     }
@@ -122,7 +125,7 @@ public class Character
         dodgePlus = 0;
         blockPlus = 0;
         parryPlus = 0;
-        lifeRegen = 1;
+        lifeRegen = 0.2f;
         staminaRegenPlus = 0;
         staminaRegenMult = 1;
         sightPlus = 0;
@@ -163,7 +166,7 @@ public class Character
 
     private void CalcMovement()
     {
-        movement = (dxActual + ht) / 4.0f + movementPlus;
+        movement = ((dxActual + ht) / 4.0f + movementPlus) * MOVEMENT_FIXED_MULTIPLIER;
     }
 
     private void CalcDodge()

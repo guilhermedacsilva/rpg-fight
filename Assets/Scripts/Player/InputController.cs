@@ -4,8 +4,7 @@ using System.Collections;
 public class InputController : MonoBehaviour
 {
     private static GameObject obj;
-
-    private PlayerController player;
+    
     private EnemyController enemy;
     private Vector3 point;
     private int terrainMask = 1 << 8;
@@ -42,7 +41,7 @@ public class InputController : MonoBehaviour
                 PlayerController.GetController().MoveTo(point);
             }
         }
-        else if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
             if (Time.time > selectTimeOK)
             {
@@ -50,7 +49,7 @@ public class InputController : MonoBehaviour
                 selectTimeOK = Time.time + selectDelayTime;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Q)) { Debug.Log("Q"); }
+        if (Input.GetKeyDown(KeyCode.Q)) { Cast(0); }
         /*
         else if (Input.GetKeyDown(KeyCode.W)) { Cast("W"); }
         else if (Input.GetKeyDown(KeyCode.E)) { Cast("E"); }
@@ -88,6 +87,7 @@ public class InputController : MonoBehaviour
             UpdateEnemySelection(null);
             enemy = null;
         }
+        PlayerController.GetController().SetEnemy(enemy);
     }
 
     private void UpdateEnemySelection(EnemyController newEnemy)
@@ -108,15 +108,12 @@ public class InputController : MonoBehaviour
         }
     }
 
-    /*
-    private void Cast(string hotkey)
+    private void Cast(int index)
     {
-        TrySetTargetEnemyOrPoint();
-        player.Cast(
-            Hotkey.ConvertKeyToIndex(hotkey),
-            point,
-            enemy);
+        PlayerController.GetController().Cast(index);
     }
+
+    /*
 
     private void TrySetTargetEnemyOrPoint()
     {

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 destination;
     private CharacterState charState;
     private HpTextController hpUI;
+    private bool isAttacking;
+    private EnemyController enemy;
 
     public static GameObject GetObject()
     {
@@ -31,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public static void Activate()
     {
         playerObj.SetActive(true);
+        GetController().isAttacking = false;
         GetController().hpUI.gameObject.SetActive(true);
         GetController().charState.character.ResetCurrents();
     }
@@ -40,11 +45,20 @@ public class PlayerController : MonoBehaviour
         {
             GoToDestination();
         }
+        
+        if (isAttacking 
+            && enemy != null 
+            && Vector3.Distance(transform.position, enemy.transform.position) <= 2f
+            && charState.TryAttack()
+            )
+        {
+            enemy.TakeDamage(charState.character.damageSt);
+        }
     }
 
     private void LateUpdate()
     {
-        hpUI.SetHp(charState.character.life, charState.character.lifeMax);
+        hpUI.SetHp(charState.character.life);
     }
 
     private void GoToDestination()
@@ -67,5 +81,18 @@ public class PlayerController : MonoBehaviour
     {
         destination = point;
         destination.y = transform.position.y;
+    }
+
+    public void SetEnemy(EnemyController enemy)
+    {
+        this.enemy = enemy;
+    }
+
+    public void Cast(int index)
+    {
+        // only attack, index == 0
+        isAttacking = !isAttacking;
+        RawImage buttonUI = GameObject.Find("/Canvas/Game2D/Button Attack").GetComponent<RawImage>();
+        buttonUI.color = isAttacking ? new Color(1, 143f/255, 143f/255) : Color.white;        
     }
 }

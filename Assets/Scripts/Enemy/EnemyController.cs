@@ -19,8 +19,13 @@ public class EnemyController : MonoBehaviour {
         hpTextController = HpTextController.Create(gameObject);
     }
 	
-	void Update ()
+	void Update()
     {
-        hpTextController.SetHp(charState.character.life, charState.character.lifeMax);
+        hpTextController.SetHp(charState.character.life);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        charState.ApplyDamage(damage);
     }
 }
